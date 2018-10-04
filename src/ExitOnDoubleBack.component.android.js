@@ -2,12 +2,17 @@
 
 import getCurrentRouteName from '../helpers/getCurrentRoute';
 import PropTypes from 'prop-types';
-import React, {Component} from 'react';
-import {BackHandler, ToastAndroid} from 'react-native';
+import React, {
+  Component
+} from 'react';
+import {
+  BackHandler,
+  ToastAndroid
+} from 'react-native';
 import noop from '../helpers/noop';
 
 class ExitOnDoubleBack extends Component {
-  componentWillMount () {
+  componentWillMount() {
     BackHandler.addEventListener('hardwareBackPress', this._handleBackPress);
   }
   timer = {
@@ -27,16 +32,17 @@ class ExitOnDoubleBack extends Component {
   }
 
   _handleBackPress = () => {
-    const {nav, backHandler} = this.props;
-    const currentRoute = getCurrentRouteName(nav);
-    if (this.props.exitableRoutes.includes(currentRoute)) { // exit the app from landing page
-      return this._handleExit();
-    } else { // in all the other cases, navigate back
-      backHandler();
-      return true;
-    }
+    return this._handleExit()
+    // const {nav, backHandler} = this.props;
+    // const currentRoute = getCurrentRouteName(nav);
+    // if (this.props.exitableRoutes.includes(currentRoute)) { // exit the app from landing page
+    //   return this._handleExit();
+    // } else { // in all the other cases, navigate back
+    //   backHandler();
+    //   return true;
+    // }
   }
-  componentWillUnmount () {
+  componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this._handleBackPress);
     clearTimeout(this.timer.ref);
     this.timer = {
@@ -45,7 +51,7 @@ class ExitOnDoubleBack extends Component {
     };
   }
 
-  render () {
+  render() {
     return this.props.children;
   }
 }
