@@ -12,7 +12,7 @@ import {
 import noop from '../helpers/noop';
 
 class ExitOnDoubleBack extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     BackHandler.addEventListener('hardwareBackPress', this._handleBackPress);
   }
   timer = {
